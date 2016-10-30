@@ -19,6 +19,8 @@ public class MainPresenter extends Presenter<MainActivity> {
     private final IoThreadSchedulerProvider subscribeOn;
     private final MainThreadSchedulerProvider observeOn;
 
+    private int bookIndex;
+
     @Inject
     public MainPresenter(final VersionService marvelComicsService, final IoThreadSchedulerProvider subscribeOn, final MainThreadSchedulerProvider observeOn) {
         this.versionService = marvelComicsService;
@@ -26,16 +28,27 @@ public class MainPresenter extends Presenter<MainActivity> {
         this.observeOn = observeOn;
     }
 
-    void refreshChapters(String bible) {
-        versionService.contents(bible).subscribeOn(subscribeOn.getScheduler()).observeOn(observeOn.getScheduler()).subscribe(this::handleResponse, this::handleError);
+    void initiateBooks(String bible) {
+        versionService.contents(bible).subscribeOn(subscribeOn.getScheduler()).observeOn(observeOn.getScheduler()).subscribe(this::handleBookResponse, this::handleError);
     }
 
-    private void handleResponse(final TableOfContentsResponse tableOfContentsResponse) {
+    void refreshChapters(String bible, int bookIndex) {
+        this.bookIndex = bookIndex;
+        versionService.contents(bible).subscribeOn(subscribeOn.getScheduler()).observeOn(observeOn.getScheduler()).subscribe(this::handleChapterResponse, this::handleError);
+    }
+
+    private void handleBookResponse(final TableOfContentsResponse tableOfContentsResponse) {
         if (!isViewAttached()) {
             return;
         }
+        getPresenterView().updateBookSelector(tableOfContentsResponse.getBooks());
+    }
 
-        getPresenterView().displayChapters(tableOfContentsResponse.getBooks().get(0).getChapters(), tableOfContentsResponse.getBooks());
+    private void handleChapterResponse(final TableOfContentsResponse tableOfContentsResponse) {
+        if (!isViewAttached()) {
+            return;
+        }
+        getPresenterView().displayChapters(tableOfContentsResponse.getBooks().get(bookIndex).getChapters());
     }
 
     private void handleError(final Throwable throwable) {

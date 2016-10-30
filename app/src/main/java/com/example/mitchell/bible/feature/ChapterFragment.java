@@ -33,24 +33,21 @@ public class ChapterFragment extends Fragment implements PresenterView {
 
     private static final String CHAPTER_NAME = "CHAPTER_NAME";
     private static final String BIBLE_NAME = "BIBLE_NAME";
-    private static final String BOOKS_NAME = "BOOKS_NAME";
 
 
     @BindView(R.id.chapter_name)
     TextView nameView;
     @BindView(R.id.chapter_text)
     TextView chapterTextView;
-    @BindView(R.id.book_spinner)
-    Spinner bookSpinner;
+
 
     @Inject
     ChapterPresenter chapterPresenter;
 
-    public static Fragment newInstance(String bible, String chapter, ArrayList<String> books) {
+    public static Fragment newInstance(String bible, String chapter) {
         final Bundle arguments = new Bundle();
         arguments.putString(CHAPTER_NAME, chapter);
         arguments.putString(BIBLE_NAME, bible);
-        arguments.putStringArrayList(BOOKS_NAME, books);
         final ChapterFragment fragment = new ChapterFragment();
         fragment.setArguments(arguments);
 
@@ -73,7 +70,6 @@ public class ChapterFragment extends Fragment implements PresenterView {
         if (getArguments() != null) {
             chapterPresenter.setChapterName(getArguments().getString(CHAPTER_NAME));
             chapterPresenter.setBibleName(getArguments().getString(BIBLE_NAME));
-            chapterPresenter.setBooks(getArguments().getStringArrayList(BOOKS_NAME));
         }
 
         return view;
@@ -93,12 +89,6 @@ public class ChapterFragment extends Fragment implements PresenterView {
         chapterTextView.setText(chapterText);
     }
 
-    void updateBookSelector(final List<String> books) {
-
-        ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, books);
-        spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item); // The drop down view
-        bookSpinner.setAdapter(spinnerArrayAdapter);
-    }
 
     void handleError(final Throwable throwable) {
         Toast.makeText(getActivity(), "Unexpected Error", Toast.LENGTH_LONG).show();

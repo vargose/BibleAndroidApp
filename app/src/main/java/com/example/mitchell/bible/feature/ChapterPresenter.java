@@ -23,7 +23,7 @@ public class ChapterPresenter extends Presenter<ChapterFragment> {
     private final MainThreadSchedulerProvider observeOn;
     private String chapterName;
     private String bibleName;
-    private ArrayList<String> books;
+
 
     @Inject
     public ChapterPresenter(final VersionService versionService, final IoThreadSchedulerProvider subscribeOn, final MainThreadSchedulerProvider observeOn) {
@@ -40,9 +40,7 @@ public class ChapterPresenter extends Presenter<ChapterFragment> {
         this.bibleName = bibleName;
     }
 
-    public void setBooks(ArrayList<String> books) {
-        this.books = books;
-    }
+
 
     void refreshChapterData() {
         if (chapterName == null || bibleName == null) {
@@ -62,8 +60,6 @@ public class ChapterPresenter extends Presenter<ChapterFragment> {
 
         getPresenterView().updateName(chapterName);
         getPresenterView().updateChapterText(chapterResponse.getChapterText());
-        getPresenterView().updateBookSelector(books);
-
     }
 
     private void handleError(final Throwable throwable) {
