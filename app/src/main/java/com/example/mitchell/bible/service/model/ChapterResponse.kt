@@ -1,4 +1,4 @@
-package com.example.mitchell.bible.service.data
+package com.example.mitchell.bible.service.model
 
 import com.google.gson.annotations.SerializedName
 
