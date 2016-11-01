@@ -8,8 +8,8 @@ import com.example.mitchell.bible.feature.MainActivity;
 import com.example.mitchell.bible.injection.ApplicationComponent;
 import com.example.mitchell.bible.injection.ApplicationModule;
 import com.example.mitchell.bible.service.VersionService;
-import com.example.mitchell.bible.service.data.VersionModel;
-import com.example.mitchell.bible.service.data.VersionResponse;
+import com.example.mitchell.bible.service.model.VersionModel;
+import com.example.mitchell.bible.service.model.VersionResponse;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -32,6 +32,7 @@ import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import rx.Observable;
 
 import static android.os.Build.VERSION_CODES.LOLLIPOP;
 import static junit.framework.Assert.assertEquals;
@@ -48,7 +49,7 @@ import static org.mockito.Mockito.when;
 public class MainActivityTest {
 
     @Mock private VersionService versionService;
-    @Mock private Call<VersionResponse> callWrapper;
+    @Mock private Observable<VersionResponse> callWrapper;
     @Captor private ArgumentCaptor<Callback<VersionResponse>> callbackArgumentCaptor;
 
     @Rule public DaggerMockRule<ApplicationComponent> daggerMockRule = new DaggerMockRule<>(ApplicationComponent.class, new ApplicationModule(((TestBibleApp) RuntimeEnvironment.application)))
