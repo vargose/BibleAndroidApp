@@ -5,7 +5,7 @@ import android.util.Log;
 import com.example.mitchell.bible.service.VersionService;
 import com.example.mitchell.bible.injection.IoThreadSchedulerProvider;
 import com.example.mitchell.bible.injection.MainThreadSchedulerProvider;
-import com.example.mitchell.bible.service.data.TableOfContentsResponse;
+import com.example.mitchell.bible.service.model.TableOfContentsResponse;
 import com.example.mitchell.bible.view.Presenter;
 
 import javax.inject.Inject;

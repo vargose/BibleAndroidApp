@@ -9,7 +9,7 @@ import android.widget.Toast;
 
 import com.example.mitchell.bible.R;
 import com.example.mitchell.bible.context.BaseApplication;
-import com.example.mitchell.bible.service.data.VersionModel;
+import com.example.mitchell.bible.service.model.VersionModel;
 import com.example.mitchell.bible.view.ImageLoader;
 import com.example.mitchell.bible.view.PresenterView;
 

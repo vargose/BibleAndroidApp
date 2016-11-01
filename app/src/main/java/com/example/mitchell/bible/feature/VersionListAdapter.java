@@ -6,7 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.mitchell.bible.R;
-import com.example.mitchell.bible.service.data.VersionModel;
+import com.example.mitchell.bible.service.model.VersionModel;
 import com.example.mitchell.bible.view.ImageLoader;
 
 import java.util.List;

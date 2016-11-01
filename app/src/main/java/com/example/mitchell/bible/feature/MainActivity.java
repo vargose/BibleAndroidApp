@@ -15,8 +15,8 @@ import com.annimon.stream.Collectors;
 import com.annimon.stream.Stream;
 import com.example.mitchell.bible.R;
 import com.example.mitchell.bible.injection.InjectionHelper;
-import com.example.mitchell.bible.service.data.BookModel;
-import com.example.mitchell.bible.service.data.ChapterModel;
+import com.example.mitchell.bible.service.model.BookModel;
+import com.example.mitchell.bible.service.model.ChapterModel;
 import com.example.mitchell.bible.view.PresenterView;
 
 import java.util.List;
