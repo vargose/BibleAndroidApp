@@ -1,4 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
 <ScrollView
+    android:id="@+id/activity_detail"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -6,10 +15,9 @@
     tools:context=".feature.MainActivity">
 
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
         <TextView
             android:id="@+id/chapter_name"
@@ -28,7 +36,19 @@
             style="@android:style/TextAppearance.DeviceDefault.Medium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@id/chapter_name"
             android:layout_margin="@dimen/activity_horizontal_margin"
-            tools:text="@string/baseball_card_description"/>
-    </LinearLayout>
+            />
+    </RelativeLayout>
 </ScrollView>
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/chapter_favorite"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/activity_horizontal_margin"
+        android:src="@drawable/ic_favorite_border_black_24dp"
+        android:tint="@android:color/white"
+        android:alpha="0.625"
+        app:layout_anchor="@id/activity_detail"
+        app:layout_anchorGravity="top|right" />
+</android.support.design.widget.CoordinatorLayout>

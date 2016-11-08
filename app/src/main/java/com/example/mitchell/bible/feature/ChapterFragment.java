@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.mitchell.bible.R;
+import com.example.mitchell.bible.data.ObservableDatabase;
 import com.example.mitchell.bible.injection.InjectionHelper;
 import com.example.mitchell.bible.view.PresenterView;
 
@@ -39,7 +41,8 @@ public class ChapterFragment extends Fragment implements PresenterView {
     TextView nameView;
     @BindView(R.id.chapter_text)
     TextView chapterTextView;
-
+    @BindView(R.id.chapter_favorite)
+    ImageView favoriteButton;
 
     @Inject
     ChapterPresenter chapterPresenter;
@@ -66,6 +69,8 @@ public class ChapterFragment extends Fragment implements PresenterView {
         final View view = inflater.inflate(R.layout.chapter_fragment, container, false);
         ButterKnife.bind(this, view);
         chapterPresenter.attachView(this);
+
+        favoriteButton.setOnClickListener(v -> chapterPresenter.toggleFavorite());
 
         if (getArguments() != null) {
             chapterPresenter.setChapterName(getArguments().getString(CHAPTER_NAME));
@@ -100,4 +105,11 @@ public class ChapterFragment extends Fragment implements PresenterView {
         chapterPresenter.detachView();
     }
 
+    public void updateFavoriteImage(boolean favorite) {
+        if (favorite) {
+            favoriteButton.setImageDrawable(ContextCompat.getDrawable(this.getContext(), R.drawable.ic_favorite_black_24dp));
+        } else {
+            favoriteButton.setImageDrawable(ContextCompat.getDrawable(this.getContext(), R.drawable.ic_favorite_border_black_24dp));
+        }
+    }
 }

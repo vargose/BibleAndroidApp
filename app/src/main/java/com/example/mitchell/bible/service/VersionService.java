@@ -1,9 +1,9 @@
 package com.example.mitchell.bible.service;
 
 
-import com.example.mitchell.bible.service.data.ChapterResponse;
-import com.example.mitchell.bible.service.data.TableOfContentsResponse;
-import com.example.mitchell.bible.service.data.VersionResponse;
+import com.example.mitchell.bible.service.model.ChapterResponse;
+import com.example.mitchell.bible.service.model.TableOfContentsResponse;
+import com.example.mitchell.bible.service.model.VersionResponse;
 
 import retrofit2.http.GET;
 import retrofit2.http.Path;
