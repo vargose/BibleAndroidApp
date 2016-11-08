@@ -3,6 +3,7 @@ package com.example.mitchell.bible.injection;
 import android.content.Context;
 
 import com.example.mitchell.bible.context.BibleApp;
+import com.example.mitchell.bible.data.ObservableDatabase;
 import com.example.mitchell.bible.feature.MainPresenter;
 import com.example.mitchell.bible.feature.VersionListPresenter;
 import com.example.mitchell.bible.service.VersionService;
@@ -31,6 +32,12 @@ public class ApplicationModule {
     @Singleton
     public BibleApp provideApplication() {
         return bibleApp;
+    }
+
+    @Provides
+    @Singleton
+    public ObservableDatabase provideObservableDatabase() {
+        return new ObservableDatabase(bibleApp.getApplicationContext());
     }
 
     @Provides
