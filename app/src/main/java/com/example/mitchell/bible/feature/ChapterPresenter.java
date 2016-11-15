@@ -62,18 +62,22 @@ public class ChapterPresenter extends Presenter<ChapterFragment> {
                 .subscribeOn(subscribeOn.getScheduler())
                 .observeOn(observeOn.getScheduler())
                 .subscribe(this::handleResponse, this::handleError);
+
         if (subscription != null) {
             subscription.unsubscribe();
         }
 
         subscription = new CompositeSubscription();
-        subscription.add(observableDatabase.observeChapters().debounce(1000, TimeUnit.MILLISECONDS)
+        Chapter defaultValue = new Chapter(chapterName);
+        defaultValue.setFavorite(false);
+        subscription.add(observableDatabase.observeChapter(chapterName)
                 .observeOn(AndroidSchedulers.mainThread())
+                .defaultIfEmpty(defaultValue)
                 .subscribe(this::updateFavorite));
     }
 
-    private void updateFavorite(final List<Chapter> chapters) {
-        chapter = Stream.of(chapters).collect(Collectors.toMap(Chapter::getChapterName, c -> c)).get(chapterName);
+    private void updateFavorite(final Chapter chapter) {
+        this.chapter = chapter;
         if(getPresenterView() !=null && chapter != null){
             getPresenterView().updateFavoriteImage(chapter.isFavorite());
         }
