@@ -79,8 +79,12 @@ public class MainActivity extends AppCompatActivity implements PresenterView {
         FragmentStatePagerAdapter adapter = new FragmentStatePagerAdapter(getSupportFragmentManager()) {
             @Override
             public Fragment getItem(final int position) {
-                final ChapterModel response = chapters.get(position);
-                return ChapterFragment.newInstance(bible, response.getChapterName());
+                if(position == 0) {
+                    return FavoritesFragment.newInstance();
+                } else {
+                    final ChapterModel response = chapters.get(position -1);
+                    return ChapterFragment.newInstance(bible, response.getChapterName());
+                }
             }
 
             @Override
